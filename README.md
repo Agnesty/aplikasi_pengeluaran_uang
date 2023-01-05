@@ -2,9 +2,7 @@
 Simple clean Expenses App using flutter.
 
 ## Packages I am using:
-- google_fonts: 2.1.0
-- provider :
-- lottie: ^2.0.0 
+- Intl
 
 ### APP UI:
 
