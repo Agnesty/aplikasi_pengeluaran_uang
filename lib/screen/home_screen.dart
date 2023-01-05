@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:sqflite/sqflite.dart';
 
 import '../model/transaksi_model.dart';
 import '../widget/iconBar_widget.dart';
