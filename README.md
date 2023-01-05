@@ -6,4 +6,4 @@ Simple clean Expenses App using flutter.
 
 ### APP UI:
 
-![App UI](/banner.png)
+![App UI](/Expenses.png)
