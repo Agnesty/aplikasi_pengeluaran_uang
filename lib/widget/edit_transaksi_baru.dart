@@ -4,9 +4,14 @@ import 'package:intl/intl.dart';
 import '../model/transaksi_model.dart';
 
 class EditTransaksiBaru extends StatefulWidget {
+  final Function edit;
   final Transaksi transaksi;
   final Function? addListExpenses;
-  const EditTransaksiBaru({this.addListExpenses, required this.transaksi, super.key});
+  const EditTransaksiBaru(
+      {required this.edit,
+      this.addListExpenses,
+      required this.transaksi,
+      super.key});
 
   @override
   State<EditTransaksiBaru> createState() => _EditTransaksiBaruState();
@@ -19,7 +24,7 @@ class _EditTransaksiBaruState extends State<EditTransaksiBaru> {
   DateTime? _selectedDate;
 
   @override
-  void initState(){
+  void initState() {
     _expensesMadeForController.text = widget.transaksi.expenses;
     _descriptionController.text = widget.transaksi.descript;
     _amountController.text = widget.transaksi.amount.toString();
@@ -70,7 +75,9 @@ class _EditTransaksiBaruState extends State<EditTransaksiBaru> {
       appBar: AppBar(title: Text('Update')),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(20,),
+          padding: EdgeInsets.all(
+            20,
+          ),
           child: Column(
             children: <Widget>[
               Text(
@@ -114,13 +121,12 @@ class _EditTransaksiBaruState extends State<EditTransaksiBaru> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                     widget.transaksi.id;
-                     ( {
-                      'expenses': _expensesMadeForController.text,
-                        'descript': _descriptionController.text,
-                        'amount': _amountController.text.toString(),
-                        'chosenDate': _selectedDate
-                      });
+                      widget.edit(
+                          widget.transaksi.id,
+                          _expensesMadeForController.text,
+                          _descriptionController.text,
+                          double.parse(_amountController.text.toString()),
+                          _selectedDate);
                     },
                     child: Card(
                       elevation: 5,

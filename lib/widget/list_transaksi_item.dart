@@ -5,9 +5,11 @@ import 'package:pengelolaan_uang_app/widget/edit_transaksi_baru.dart';
 import '../model/transaksi_model.dart';
 
 class ListTransaksiItem extends StatefulWidget {
+  final Function edit;
   final Transaksi transaksi;
   final Function delete;
   const ListTransaksiItem({
+    required this.edit,
     required this.delete,
     required this.transaksi,
     Key? key,
@@ -54,6 +56,7 @@ class _ListTransaksiItemState extends State<ListTransaksiItem> {
                               .push(MaterialPageRoute(
                                   builder: (context) => EditTransaksiBaru(
                                         transaksi: widget.transaksi,
+                                        edit: widget.edit,
                                       )))
                               .then((value) {
                                 setState((){});
