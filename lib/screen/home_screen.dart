@@ -85,10 +85,29 @@ class _HomeScreenState extends State<HomeScreen> {
         });
   }
 
-   double get totalSpending {
-    return _transaksiPengguna.fold(0.0, (sum, item){
+  double get totalSpending {
+    return _transaksiPengguna.fold(0.0, (sum, item) {
       return sum + (item.amount as double);
     });
+  }
+
+  void _edit(String id, String expenses, String descript, double amount,
+      DateTime chosenDate) {
+    final editItem = Transaksi(
+      id: id,
+      expenses: expenses,
+      descript: descript,
+      chosenDate: chosenDate,
+      amount: amount,
+    );
+
+    setState(() {
+      _transaksiPengguna[_transaksiPengguna
+          .indexWhere((item) => item.id == editItem.id)] = editItem;
+          // print("Berhasil Edit" + editItem.id);
+    });
+
+    Navigator.of(context).pop();
   }
 
   @override
@@ -146,15 +165,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: TextStyle(fontSize: 14),
                             )),
                         Center(
-                          child: 
-                          totalSpending == 0 ?
-                           Text('0', style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 28),)
-                           : Text( 
-                            'Rp ${totalSpending.toStringAsFixed(3)}',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 28),
-                          ),
+                          child: totalSpending == 0
+                              ? Text(
+                                  '0',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 28),
+                                )
+                              : Text(
+                                  'Rp ${totalSpending.toStringAsFixed(3)}',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 28),
+                                ),
                         ),
                       ],
                     ),
@@ -204,6 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ListTransaksi(
                     transaksi: _transaksiPengguna,
                     delete: _delete,
+                    edit: _edit,
                   ),
                 )
               ],
